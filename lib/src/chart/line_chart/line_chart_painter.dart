@@ -341,9 +341,8 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
           max(data.minY, data.lineTouchData.getTouchLineStart(barData, index)));
       final lineEndY = min(data.maxY,
           max(data.minY, data.lineTouchData.getTouchLineEnd(barData, index)));
-      final lineStart =
-          Offset(touchedSpot.dx, getPixelY(lineStartY, viewSize, holder));
-      var lineEnd =
+      var lineEnd = Offset(touchedSpot.dx, 10);
+      var lineStart =
           Offset(touchedSpot.dx, getPixelY(lineEndY, viewSize, holder));
 
       /// If line end is inside the dot, adjust it so that it doesn't overlap with the dot.
@@ -1051,10 +1050,17 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       tooltipTopPosition =
           mostTopOffset.dy - tooltipHeight - tooltipData.tooltipMargin;
     }
+    tooltipTopPosition = 0;
+
+    final isBeforeCenterOfMaxX =
+        showOnSpot.x < holder.data.minX + (holder.data.horizontalDiff / 2);
+    var diffOfLeft = isBeforeCenterOfMaxX ? 1 : tooltipWidth - 1;
+    var tooltipLeftPosition =
+        mostTopOffset.dx - diffOfLeft;
 
     /// draw the background rect with rounded radius
     var rect = Rect.fromLTWH(
-      mostTopOffset.dx - (tooltipWidth / 2),
+      tooltipLeftPosition,
       tooltipTopPosition,
       tooltipWidth,
       tooltipHeight,
@@ -1105,11 +1111,13 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     }
 
     final radius = Radius.circular(tooltipData.tooltipRoundedRadius);
-    final roundedRect = RRect.fromRectAndCorners(rect,
-        topLeft: radius,
-        topRight: radius,
-        bottomLeft: radius,
-        bottomRight: radius);
+    final roundedRect = RRect.fromRectAndCorners(
+      rect,
+      topLeft: radius,
+      topRight: radius,
+      bottomLeft: isBeforeCenterOfMaxX ? Radius.zero: radius,
+      bottomRight: isBeforeCenterOfMaxX ? radius : Radius.zero,
+    );
     _bgTouchTooltipPaint.color = tooltipData.tooltipBgColor;
 
     final rotateAngle = tooltipData.rotateAngle;
