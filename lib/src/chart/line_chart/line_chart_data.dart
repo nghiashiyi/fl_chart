@@ -1571,6 +1571,10 @@ class LineTouchTooltipData with EquatableMixin {
   /// Applies a bottom margin for showing tooltip on top of rods.
   final double tooltipMargin;
 
+  /// Applies a tool tip fixed top position without calculation.
+  /// When [tooltipFixedTopPosition] is not null, it will be used as top position.
+  final double? tooltipFixedTopPosition;
+
   /// Restricts the tooltip's width.
   final double maxContentWidth;
 
@@ -1613,6 +1617,7 @@ class LineTouchTooltipData with EquatableMixin {
     bool? fitInsideVertically,
     bool? showOnTopOfTheChartBoxArea,
     double? rotateAngle,
+    double? tooltipFixedTopPosition,
   })  : tooltipBgColor = tooltipBgColor ?? Colors.blueGrey.darken(15),
         tooltipRoundedRadius = tooltipRoundedRadius ?? 4,
         tooltipPadding = tooltipPadding ??
@@ -1624,6 +1629,7 @@ class LineTouchTooltipData with EquatableMixin {
         fitInsideVertically = fitInsideVertically ?? false,
         showOnTopOfTheChartBoxArea = showOnTopOfTheChartBoxArea ?? false,
         rotateAngle = rotateAngle ?? 0.0,
+        tooltipFixedTopPosition = tooltipFixedTopPosition,
         super();
 
   /// Used for equality check, see [EquatableMixin].
@@ -1633,6 +1639,7 @@ class LineTouchTooltipData with EquatableMixin {
         tooltipRoundedRadius,
         tooltipPadding,
         tooltipMargin,
+        tooltipFixedTopPosition,
         maxContentWidth,
         getTooltipItems,
         fitInsideHorizontally,
