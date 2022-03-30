@@ -1044,19 +1044,19 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     final tooltipHeight = sumTextsHeight + tooltipData.tooltipPadding.vertical;
 
     double tooltipTopPosition;
-    if (tooltipData.showOnTopOfTheChartBoxArea) {
+    if (tooltipData.tooltipFixedTopPosition != null) {
+      tooltipTopPosition = tooltipData.tooltipFixedTopPosition!;
+    } else if (tooltipData.showOnTopOfTheChartBoxArea) {
       tooltipTopPosition = 0 - tooltipHeight - tooltipData.tooltipMargin;
     } else {
       tooltipTopPosition =
           mostTopOffset.dy - tooltipHeight - tooltipData.tooltipMargin;
     }
-    tooltipTopPosition = 0;
 
     final isBeforeCenterOfMaxX =
         showOnSpot.x < holder.data.minX + (holder.data.horizontalDiff / 2);
     var diffOfLeft = isBeforeCenterOfMaxX ? 1 : tooltipWidth - 1;
-    var tooltipLeftPosition =
-        mostTopOffset.dx - diffOfLeft;
+    var tooltipLeftPosition = mostTopOffset.dx - diffOfLeft;
 
     /// draw the background rect with rounded radius
     var rect = Rect.fromLTWH(
@@ -1115,7 +1115,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       rect,
       topLeft: radius,
       topRight: radius,
-      bottomLeft: isBeforeCenterOfMaxX ? Radius.zero: radius,
+      bottomLeft: isBeforeCenterOfMaxX ? Radius.zero : radius,
       bottomRight: isBeforeCenterOfMaxX ? radius : Radius.zero,
     );
     _bgTouchTooltipPaint.color = tooltipData.tooltipBgColor;
