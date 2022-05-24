@@ -1,3 +1,21 @@
+## 0.50.6
+* **IMPROVEMENT** Fix a backward compatibility issue with Flutter 3.0, #1016
+
+## 0.50.5
+* **IMPROVEMENT** Fix test coverage problem again :/
+
+## 0.50.4
+* **IMPROVEMENT** Fix test coverage problem 
+
+## 0.50.3
+* **IMPROVEMENT** Fix order of drawing lineChart bar indicator problem, #198.
+* **FEATURE** Add `isStrokeJoinRound` property in [LineChartBarData](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/line_chart.md#linechartbardata).
+* **IMPROVEMENT** Upgrade to Flutter 3, #997.
+* **FEATURE** Add `chartRendererKey` property to the [LineChart](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/line_chart.md), [BarChart](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/bar_chart.md), and [ScatterChart](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/scatter_chart.md). We pass it directly to our chart renderers that are responsible to render the chart itself (without anything around it like titles), #987.
+
+## 0.50.1 
+* **BUGFIX** Allow to show axisTitle without sideTitles, #963
+
 ## 0.50.0
 **This release has some breaking changes. So please check out the migration guide [here](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/migration_guides/MIGRATION_00_50_00.md)**
 * **IMPROVEMENT** Allow to return a Widget in [SideTitles.getTitlesWidget](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/base_chart.md#sidetitles) instead of a `String`. For example, you can pass an [Icon](https://api.flutter.dev/flutter/widgets/Icon-class.html) widget as a title, #183. Check below samples:

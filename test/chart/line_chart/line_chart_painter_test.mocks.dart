@@ -395,6 +395,10 @@ class MockBuildContext extends _i1.Mock implements _i3.BuildContext {
       super.noSuchMethod(Invocation.method(#visitChildElements, [visitor]),
           returnValueForMissingStub: null);
   @override
+  void dispatchNotification(_i3.Notification? notification) => super
+      .noSuchMethod(Invocation.method(#dispatchNotification, [notification]),
+          returnValueForMissingStub: null);
+  @override
   _i3.DiagnosticsNode describeElement(String? name,
           {_i4.DiagnosticsTreeStyle? style =
               _i4.DiagnosticsTreeStyle.errorProperty}) =>
@@ -543,11 +547,11 @@ class MockLineChartPainter extends _i1.Mock implements _i9.LineChartPainter {
   @override
   void drawTouchedSpotsIndicator(
           _i6.CanvasWrapper? canvasWrapper,
-          _i7.LineChartBarData? barData,
+          List<_i9.LineIndexDrawingInfo>? lineIndexDrawingInfo,
           _i10.PaintHolder<_i7.LineChartData>? holder) =>
       super.noSuchMethod(
-          Invocation.method(
-              #drawTouchedSpotsIndicator, [canvasWrapper, barData, holder]),
+          Invocation.method(#drawTouchedSpotsIndicator,
+              [canvasWrapper, lineIndexDrawingInfo, holder]),
           returnValueForMissingStub: null);
   @override
   _i2.Path generateBarPath(
