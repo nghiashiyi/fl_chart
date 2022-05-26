@@ -231,6 +231,9 @@ class LineChartBarData with EquatableMixin {
   /// It throws an exception if you provide both [color] and [gradient]
   final Color? color;
 
+  /// If provided, this will specific line color different with [color]
+  final Color? lineColor;
+
   /// If provided, this [LineChartBarData] draws with this [gradient].
   /// Otherwise we use [color] to draw the background.
   /// It throws an exception if you provide both [color] and [gradient]
@@ -328,6 +331,7 @@ class LineChartBarData with EquatableMixin {
     List<FlSpot>? spots,
     bool? show,
     Color? color,
+    Color? lineColor,
     Gradient? gradient,
     double? barWidth,
     bool? isCurved,
@@ -348,6 +352,7 @@ class LineChartBarData with EquatableMixin {
         show = show ?? true,
         color =
             color ?? ((color == null && gradient == null) ? Colors.cyan : null),
+        lineColor = lineColor,
         gradient = gradient,
         barWidth = barWidth ?? 2.0,
         isCurved = isCurved ?? false,
@@ -438,6 +443,7 @@ class LineChartBarData with EquatableMixin {
     List<FlSpot>? spots,
     bool? show,
     Color? color,
+    Color? lineColor,
     Gradient? gradient,
     double? barWidth,
     bool? isCurved,
@@ -459,6 +465,7 @@ class LineChartBarData with EquatableMixin {
       spots: spots ?? this.spots,
       show: show ?? this.show,
       color: color ?? this.color,
+      lineColor: lineColor ?? this.lineColor,
       gradient: gradient ?? this.gradient,
       barWidth: barWidth ?? this.barWidth,
       isCurved: isCurved ?? this.isCurved,
