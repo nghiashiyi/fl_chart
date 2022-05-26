@@ -838,7 +838,7 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
       getPixelY(barData.mostBottomSpot.y, viewSize, holder),
     );
     _barPaint.setColorOrGradient(
-      barData.color,
+      barData.lineColor ?? barData.color,
       barData.gradient,
       rectAroundTheLine,
     );
@@ -1225,6 +1225,10 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
   ) {
     final data = holder.data;
 
+    /// Differentiate bottom part to understand where is touching.
+    final bottomPart = size.height - (size.height / 5);
+    final isTouchingBottomPart = localPosition.dy >= bottomPart;
+
     /// it holds list of nearest touched spots of each line
     /// and we use it to draw touch stuff on them
     final touchedSpots = <TouchLineBarSpot>[];
@@ -1243,7 +1247,10 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
 
     touchedSpots.sort((a, b) => a.distance.compareTo(b.distance));
 
-    return touchedSpots.isEmpty ? null : touchedSpots;
+    /// Only allow 1 detected touch to return at one time.
+    /// (To display respective tooltip)
+    final finalTouchedSpots = touchedSpots.where((element) => isTouchingBottomPart ? element.barIndex == 1 : element.barIndex == 0).toList();
+    return finalTouchedSpots.isEmpty ? null : [finalTouchedSpots.first];
   }
 
   /// find the nearest spot base on the touched offset
