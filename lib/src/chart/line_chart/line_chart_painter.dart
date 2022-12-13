@@ -1247,10 +1247,14 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
 
     touchedSpots.sort((a, b) => a.distance.compareTo(b.distance));
 
-    /// Only allow 1 detected touch to return at one time.
     /// (To display respective tooltip)
-    final finalTouchedSpots = touchedSpots.where((element) => isTouchingBottomPart ? element.barIndex == 1 : element.barIndex == 0).toList();
-    return finalTouchedSpots.isEmpty ? null : [finalTouchedSpots.first];
+    final finalTouchedSpots = <TouchLineBarSpot>[];
+    if (isTouchingBottomPart) {
+      finalTouchedSpots.addAll(touchedSpots.where((element) => element.barIndex == 2).toList());
+    } else {
+      finalTouchedSpots.addAll(touchedSpots.where((element) => element.barIndex == 1 || element.barIndex == 0).toList());
+    }
+    return finalTouchedSpots.isEmpty ? null : finalTouchedSpots;
   }
 
   /// find the nearest spot base on the touched offset
