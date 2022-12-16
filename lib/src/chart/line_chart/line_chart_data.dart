@@ -205,6 +205,7 @@ class LineChartData extends AxisChartData with EquatableMixin {
 
 /// Holds data for drawing each individual line in the [LineChart]
 class LineChartBarData with EquatableMixin {
+  final String? tag;
   /// This line goes through this spots.
   ///
   /// You can have multiple lines by splitting them,
@@ -347,6 +348,7 @@ class LineChartBarData with EquatableMixin {
     List<int>? dashArray,
     Shadow? shadow,
     bool? isStepLineChart,
+    String? tag,
     LineChartStepData? lineChartStepData,
   })  : spots = spots ?? const [],
         show = show ?? true,
@@ -369,6 +371,7 @@ class LineChartBarData with EquatableMixin {
         dashArray = dashArray,
         shadow = shadow ?? const Shadow(color: Colors.transparent),
         isStepLineChart = isStepLineChart ?? false,
+        tag = tag,
         lineChartStepData = lineChartStepData ?? LineChartStepData() {
     FlSpot? mostLeft, mostTop, mostRight, mostBottom;
 
@@ -459,9 +462,11 @@ class LineChartBarData with EquatableMixin {
     List<int>? showingIndicators,
     Shadow? shadow,
     bool? isStepLineChart,
+    String? tag,
     LineChartStepData? lineChartStepData,
   }) {
     return LineChartBarData(
+      tag: tag ?? this.tag,
       spots: spots ?? this.spots,
       show: show ?? this.show,
       color: color ?? this.color,
