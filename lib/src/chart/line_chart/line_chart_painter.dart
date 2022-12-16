@@ -1250,9 +1250,9 @@ class LineChartPainter extends AxisChartPainter<LineChartData> {
     /// (To display respective tooltip)
     final finalTouchedSpots = <TouchLineBarSpot>[];
     if (isTouchingBottomPart) {
-      finalTouchedSpots.addAll(touchedSpots.where((element) => element.barIndex == 2).toList());
+      finalTouchedSpots.addAll(touchedSpots.where((element) => element.bar.tag == "event").toList());
     } else {
-      finalTouchedSpots.addAll(touchedSpots.where((element) => element.barIndex == 1 || element.barIndex == 0).toList());
+      finalTouchedSpots.addAll(touchedSpots.where((element) => element.bar.tag != "event").toList());
     }
     return finalTouchedSpots.isEmpty ? null : finalTouchedSpots;
   }
